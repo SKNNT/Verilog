@@ -1,0 +1,28 @@
+import numpy as np
+
+def generate_sine_lut(size=64):
+    # Generate an array of angles from 0 to 2π
+    angles = np.linspace(0, 2 * np.pi, size, endpoint=False)
+
+    # Compute sine values
+    sine_values = np.sin(angles)
+
+    # Convert values to range -128 to 127
+    lut = np.round(sine_values * 127).astype(int)
+
+    return lut
+
+def int_to_twos_complement(value, bits=8):
+    """Convert an integer to its two's complement binary representation."""
+    if value < 0:
+        value = (1 << bits) + value  # Add 256 for negative values
+    return format(value, f'0{bits}b')  # Format as binary with leading zeros
+
+# Generate sine LUT
+lut_size = 64
+sine_lut = generate_sine_lut(lut_size)
+
+# Output values in the desired format
+for i in range(lut_size):
+    binary_value = int_to_twos_complement(sine_lut[i])
+    print(binary_value)

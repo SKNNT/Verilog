@@ -1,0 +1,20 @@
+def generate_sine_lut(size=64):
+    # Генерируем массив углов от 0 до 2π
+    angles = np.linspace(0, 2 * np.pi, size, endpoint=False)
+
+    # Вычисляем значения синуса
+    sine_values = np.sin(angles)
+
+    # Преобразуем значения в диапазон от -128 до 127
+    lut = np.round(sine_values * 127).astype(int)
+
+    return lut
+
+
+# Генерация таблицы значений синуса
+lut_size = 64
+sine_lut = generate_sine_lut(lut_size)
+
+# Вывод значений LUT
+for i in range(lut_size):
+    print(f'lut[{i}] = {sine_lut[i]}'";""")
