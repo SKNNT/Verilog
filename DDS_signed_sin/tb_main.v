@@ -4,11 +4,10 @@ module tb_main;
 
     // Parameters
     parameter CLK_PERIOD = 10; // Clock period in ns
-    
+    parameter DESIRED_FREQ = 5_000_000;
     // Inputs
     reg clk;
     reg rst;
-    reg [5:0] freq_res;
     reg [7:0] phase;
 
     // Outputs
@@ -18,8 +17,8 @@ module tb_main;
     main uut (
         .clk(clk),
         .rst(rst),
-        .freq_res(freq_res),
         .phase(phase),
+        .desired_freq(DESIRED_FREQ),
         .out(out)
     );
 
@@ -34,17 +33,13 @@ module tb_main;
     initial begin
         // Initialize inputs
         rst = 1;
-        freq_res = 6'b000000; // Initial frequency resolution
-        phase = 8'b00000000;  // Initial phase
+        phase = 8'b0100_0000;  // Initial phase
         
         // Wait for a few clock cycles
         #20;
-
         // Release reset
         rst = 0;
-        
-        // Test case 1: Change frequency resolution and observe output
-        freq_res = 6'b001000; // Small frequency increment
+
         #10000; // Wait for some clock cycles
 
         
