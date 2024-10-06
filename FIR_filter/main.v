@@ -8,7 +8,7 @@ parameter N = 15;
 reg signed [15:0] coeffs [0:N-1];
 
 initial begin
-    coeffs[0] = 0;
+    coeffs[0] = 1;
     coeffs[1] = -2;
     coeffs[2] = 2;
     coeffs[3] = 18;
@@ -22,7 +22,7 @@ initial begin
     coeffs[11] = 18;
     coeffs[12] = 2;
     coeffs[13] = -2;
-    coeffs[14] = 0;
+    coeffs[14] = 1;
 end
 
 integer i;
@@ -43,12 +43,12 @@ always @(posedge clk or negedge nreset) begin
 //////////////////////////////////////////////// 
     end else begin
         for (i = N-1; i > 0; i = i - 1) begin
-            delay_line[i] <= delay_line[i-1];//{1,2,3,0}->{0,1,2,3}
+            delay_line[i] = delay_line[i-1];//{1,2,3,0}->{0,1,2,3}
         end
-        delay_line[0] <= x; //{x,1,2,3}
-        y <= 0;
+        delay_line[0] = x; //{x,1,2,3}
+        y = 0;
         for (i = 0; i < N; i = i + 1) begin
-            y <= y + (delay_line[i] * coeffs[i]);
+            y = y + (delay_line[i] * coeffs[i]);
         end
     end
 end

@@ -37,22 +37,22 @@ module tb_main;
         nreset = 1; // Release reset
 
         // Test input values
-        #10 x = 12;   // First input value
-        #10 x = -5;   // Second input value
-        #10 x = 7;    // Third input value
-        #10 x = -3;   // Fourth input value
+        #10 x = 2;   // First input value
+        #10 x = 3;   // Second input value
+        #10 x = 5;    // Third input value
+        #10 x = 1;   // Fourth input value
         #10 x = 0;    // Fifth input value
 
         // More test inputs to observe behavior
-        #10 x = 15;   // Sixth input value
-        #10 x = -10;  // Seventh input value
-        #10 x = 8;    // Eighth input value
+        #10 x = 5;   // Sixth input value
+        #10 x = -4;  // Seventh input value
+        #10 x = 0;    // Eighth input value
 
         // Finish simulation after some time
-        #50 $finish;
+        #10 $finish;
     end
 
-    // Monitor output changes
+    // Monitor output changses
         initial begin
         $monitor("Time: %0t | Input: %d | Output: %d", $time, x, y);
     end
